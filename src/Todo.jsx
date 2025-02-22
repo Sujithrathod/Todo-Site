@@ -1,11 +1,12 @@
 import {useState} from "react"
+import { v4 as uuidv4 } from 'uuid';
 
 function Todo(){
-    let [todo,settodo] = useState(["sample state"]);
+    let [todo,settodo] = useState([{task : "sample-task", Id : uuidv4()}]);
     let [adds,setadd] = useState("");
 
     let todoFun = ()=>{
-        settodo([...todo,adds]);
+        settodo([...todo,{task:adds,Id:uuidv4()}]);
         setadd("");
     }
     
@@ -23,7 +24,7 @@ function Todo(){
             <ul>
                 {
                     todo.map((vals)=>{
-                        return <li>{vals}</li>
+                        return <li key={vals.Id} >{vals.task}</li>
                     })
                 }
             </ul>
